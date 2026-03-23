@@ -1,8 +1,3 @@
-![Pipeline Status](http://git.axiom/axiom/genpass/badges/main/pipeline.svg)
-![Cargo Audit](http://git.axiom/axiom/genpass/-/jobs/artifacts/main/raw/cargo-audit.svg?job=badger-cargo-audit)
-![Trivy](http://git.axiom/axiom/genpass/-/jobs/artifacts/main/raw/trivy-audit.svg?job=badger-trivy)
-
-
 genpass
 ===============
 
@@ -12,30 +7,37 @@ Copyright 2026 Axiom Data Science, LLC
 
 See LICENSE for details.
 
+Usage
+-----
+
+    genpass [OPTIONS]
+
+Options:
+
+    -n, --length <LENGTH>    Password length [default: 32]
+    -s, --secure             Include all special characters (~!@#$%^&*()_+`-=[]{};':",./<>?\|)
+    -u, --semi-secure        Include safer special characters only (_+-=?)
+    -h, --help               Print help
+    -V, --version            Print version
+
+Examples:
+
+    genpass                        # 32-character alphanumeric password
+    genpass -n 64                  # 64-character alphanumeric password
+    genpass --secure               # 32-character password with all special characters
+    genpass -n 16 --semi-secure    # 16-character password with safer special characters
+
 Building
 --------
 
-In order to build the project, contributors need rust, see
-[Install Rust](https://www.rust-lang.org/tools/install) for details about
-installing the rust development environment on your system.
+Requires Rust — see [Install Rust](https://www.rust-lang.org/tools/install) for details.
 
-To build the project:
+    cargo build --release
 
-    cargo build
+The compiled binary will be at `target/release/genpass`.
 
-To run the binary without building a release version or installing to a locally available path:
+To run without installing:
 
-    cargo run
+    cargo run -- [OPTIONS]
 
-For details about `cargo` and using `cargo`, please see [The Cargo Book](https://doc.rust-lang.org/cargo/commands/index.html)
-
-Docker
-------
-
-To build the docker image:
-
-    docker build -t genpass .
-
-To run the image as a docker container
-
-    docker run -it --rm genpass
+For more on `cargo`, see [The Cargo Book](https://doc.rust-lang.org/cargo/commands/index.html).
